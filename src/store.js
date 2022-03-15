@@ -8,12 +8,14 @@ import axios from 'axios';
 const LOAD_COMPANIES = 'LOAD_COMPANIES'
 const CREATE_COMPANIES = 'CREATE_COMPANIES'
 const DELETE_COMPANY = 'DELETE_COMPANY'
+const UPDATE_COMPANY = 'UPDATE_COMPANY'
 
 const LOAD_STAFFS = 'LOAD_STAFFS'
 const CREATE_STAFFS = 'CREATE_STAFFS'
 const DELETE_STAFF = 'DELETE_STAFF'
 
 const SET_VIEW = 'SET_VIEW'
+
 
 const companiesReducer = (state = [], action) => {
 	if(action.type === LOAD_COMPANIES) {
@@ -24,6 +26,9 @@ const companiesReducer = (state = [], action) => {
 	}
 	if(action.type === DELETE_COMPANY) {
 		state = state.filter(company => company.id !== action.company.id)
+	}
+	if(action.type === UPDATE_COMPANY) {
+		state = state.map(company => company.id === action.company.id ? action.company : company)
 	}
 
 	return state
@@ -79,6 +84,13 @@ const deleteCompany = (company) => {
 	}
 }
 
+const updatedCompany = (company) => {
+	return async(dispatch) => {
+		const updated = (await axios.put(`/api/companies/${company.id}`, {subscribed: !company.subscribed})).data
+		dispatch({ type: UPDATE_COMPANY, company: updated})
+	}
+}
+
 //staff data
 const loadStaffs = () => {
 	return async(dispatch) => {
@@ -112,7 +124,7 @@ const setView = (view) => {
 
 const store = createStore(reducer, applyMiddleware(thunk, logger))
 
-export {loadCompanies, createCompany, deleteCompany, loadStaffs, createStaff, deleteStaff, setView} 
+export {loadCompanies, createCompany, deleteCompany, updatedCompany, loadStaffs, createStaff, deleteStaff, setView} 
 
 export default store
 

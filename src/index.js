@@ -4,7 +4,8 @@ import { connect, Provider } from 'react-redux'
 import store, { loadCompanies, loadStaffs }from './store'
 import Companies from './Companies'
 import Staffs from './Staffs'
-
+import Nav from './Nav'
+import Home from './Home'
 
 class _App extends Component {
 
@@ -19,12 +20,17 @@ class _App extends Component {
 	}
 
 	render() {
-		const {companies, staffs, view} = this.props
+		const { companies, staffs, view } = this.props
 		return (
 			<div>
-				<h1>Acme Bootcamp</h1>
-				<Companies />
-				<Staffs />
+				<h1>Acme Portal</h1>
+				<small>Moe <a>Sign out</a></small>
+					<Nav/>
+					{view === 'home' &&  <Home/>}
+				<div className='container'>
+					{view === 'companies' && <Companies />}
+					{view === 'staffs' && <Staffs />}
+				</div>
 			</div>
 		)
 	}

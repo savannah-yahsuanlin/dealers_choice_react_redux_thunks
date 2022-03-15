@@ -36,6 +36,16 @@ app.delete('/api/companies/:id', async(req, res, next) => {
 	}
 })
 
+app.put('/api/companies/:id', async(req, res, next) => {
+	try {
+		const company = await Company.findByPk(req.params.id)
+		await company.update(req.body)
+		res.send(company)
+	} catch (error) {
+		next(error)
+	}
+})
+
 //Staff
 app.get('/api/staffs', async(req, res, next) => {
 	try {

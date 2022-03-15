@@ -1,4 +1,4 @@
-const {Sequelize, STRING } = require('sequelize')
+const {Sequelize, STRING, BOOLEAN} = require('sequelize')
 const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_react_redux')
 const faker = require('faker')
 
@@ -10,6 +10,10 @@ const Company = db.define('company', {
 		validate: {
 			notEmpty: true
 		}
+	},
+	subscribed: {
+		type: BOOLEAN,
+		defaultValue: false
 	}
 })
 
@@ -38,14 +42,15 @@ const syncAndSeed = async() => {
 	await db.sync({force: true})
 
 	await Promise.all([
-		Company.create({name: 'Pfizer'}),
-		Company.create({name: 'Johnson and Johnson'}),
+		Company.create({name: 'Pfizer', subscribed: true}),
+		Company.create({name: 'Johnson and Johnson', subscribed: true}),
 		Company.create({name: 'Novartis'}),
 
 		Staff.create({name: 'Prof'}),
 		Staff.create({name: 'Jonathan'}),
 		Staff.create({name: 'Stanley'}),
-		Staff.create({name: 'Shaun'})
+		Staff.create({name: 'Shaun'}),
+		Staff.create({name: 'Moe'})
 	])
 }
 

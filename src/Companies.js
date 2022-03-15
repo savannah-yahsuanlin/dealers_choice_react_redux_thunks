@@ -1,13 +1,17 @@
 import React from "react"
 import { connect } from 'react-redux'
-import { createCompany, deleteCompany } from "./store"
+import { createCompany, deleteCompany, updatedCompany } from "./store"
 
 
-const Companies = ({ companies, create, foo }) => {
+const Companies = ({ companies, create, foo, toggle }) => {
 
 	return (
-		<div className="company">
-			
+	<div>
+		<h4>2022 Target <span>100</span> companies join Acme Bootcamp.
+			<span> Need {100 - companies.length}</span>
+		</h4>
+		<p className="subscribed">Confirmed the company will join 2022 presentation event</p>
+		<div>
 			<button onClick={create}>Add</button>
 			<ul>
 				<h3>Companies</h3>	
@@ -15,7 +19,7 @@ const Companies = ({ companies, create, foo }) => {
 					companies.map(company => {
 						return (
 							<div>
-								<li key={company.id}>{company.id}. {company.name}</li>
+								<li onClick={() => toggle(company)} className={ company.subscribed ? 'subscribed': ''} key={company.id}>{company.id}. {company.name}</li>
 								<button onClick={ () => foo(company)}>X</button>
 							</div>
 						)
@@ -23,6 +27,7 @@ const Companies = ({ companies, create, foo }) => {
 				}
 			</ul>
 		</div>
+	</div>
 	)
 }
 
@@ -34,6 +39,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		foo: (company) => {
 			dispatch(deleteCompany(company))
+		},
+		toggle: (company) => {
+			dispatch(updatedCompany(company))
 		}
 	}
 }

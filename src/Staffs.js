@@ -5,6 +5,8 @@ import { createStaff, deleteStaff } from './store'
 
 const Staffs = ({ staffs, create, bar }) => {
 	return (
+	<div>
+		<h4>More amazing staffs are coming</h4>
 		<div>
 			<button onClick={ create }>Add</button>
 			<ul>
@@ -21,6 +23,7 @@ const Staffs = ({ staffs, create, bar }) => {
 				}
 			</ul>
 		</div>
+	</div>
 	)
 }
 

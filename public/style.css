@@ -1,8 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 
 body {
 	font-family: 'Roboto', sans-serif;
 }
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	margin: 10px auto;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 5px 10px;
+}
+
+a:hover {
+	background-color: #d5d9d9;
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+	margin: 0 auto;
+}
+
+.home {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	height: 50%;
+	width: 100%;
+	
+}
+
 
 ul div {
 	display: flex;
@@ -28,4 +62,12 @@ button {
 
 .button:hover {
   background-color: #f7fafa;
+}
+
+h4 > span {
+	font-size: 20px;
+}
+
+.subscribed {
+	background-color: yellow;
 }
