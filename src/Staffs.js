@@ -15,7 +15,7 @@ const Staffs = ({ staffs, create, bar }) => {
 					staffs.map(staff => {
 						return (
 							<div>
-								<li key={staff.id}>{staff.id}. {staff.name}</li>
+								<li key={staff.id}>{staff.name}</li>
 								<button onClick={ () => bar(staff)}>X</button>
 							</div>
 						)
